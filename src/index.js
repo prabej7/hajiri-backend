@@ -31,6 +31,8 @@ app.use("/get-tables", require("./routes/tables/getTables"));
 app.use("/get-day-table", require("./routes/tables/get-day-table"));
 app.use("/recent", require("./routes/tables/getRecent"));
 app.use("/get-stats", require("./routes/getStats"));
+app.use("/check-user", require("./routes/auth/checkUser"));
+app.use("/change-password-otp", require("./routes/auth/changePassword"));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

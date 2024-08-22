@@ -16,7 +16,7 @@ changePassword.post("/", (req, res) => {
           { email: email },
           { $set: { password: hashSync(password, 12) } }
         );
-        console.log(re);
+
         return res
           .status(200)
           .json({ message: "Password updated Successfully." });

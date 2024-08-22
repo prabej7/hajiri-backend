@@ -8,8 +8,17 @@ const requestOtp = Router();
 requestOtp.post("/", (req, res) => {
   (async () => {
     try {
-      const { token } = req.body;
-      const email = getData(token).email;
+      const { token, email } = req.body;
+      let e;
+
+      if (token) {
+        e = getData(token).email;
+      }
+
+      if (email) {
+        e = email;
+      }
+
       const otp = generate(6, {
         digits: true,
         lowerCaseAlphabets: false,
@@ -18,7 +27,7 @@ requestOtp.post("/", (req, res) => {
       });
 
       const otpToken = getToken(otp);
-      await mail(email, otp);
+      await mail(e, otp);
       return res
         .status(200)
         .json({ message: "OTP sent to the email.", otpToken: otpToken });
