@@ -15,7 +15,12 @@ const attendeeSchema = new Schema(
       ref: "table",
       required: true,
     },
+    present: {
+      type: Number,
+      default: 0,
+    },
   },
+
   {
     timestamps: true,
   }

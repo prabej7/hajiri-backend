@@ -29,6 +29,8 @@ app.use("/update-attendee", require("./routes/attendee/updateName"));
 app.use("/create-today-table", require("./routes/tables/createTodayTable"));
 app.use("/get-tables", require("./routes/tables/getTables"));
 app.use("/get-day-table", require("./routes/tables/get-day-table"));
+app.use("/recent", require("./routes/tables/getRecent"));
+app.use("/get-stats", require("./routes/getStats"));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

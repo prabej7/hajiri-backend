@@ -1,11 +1,23 @@
 const { Schema, model } = require("mongoose");
 
+const attendeeSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  presence: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+});
+
 const dayTableSchema = new Schema({
   date: {
     type: String,
     required: true,
   },
-  attendees: [],
+  attendees: [attendeeSchema], 
   table: {
     type: Schema.Types.ObjectId,
     ref: "table",

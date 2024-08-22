@@ -16,6 +16,8 @@ verifyOtp.post("/", (req, res) => {
           { $set: { isVerified: true } }
         );
         return res.status(200).json({ message: "User verified successfully!" });
+      }else{
+        return res.status(400).json({message:"Invalid OTP"})
       }
     } catch (e) {
       return res.status(500).json({ message: "Internal Server Error." });

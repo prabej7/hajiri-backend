@@ -12,10 +12,11 @@ requestOtp.post("/", (req, res) => {
       const email = getData(token).email;
       const otp = generate(6, {
         digits: true,
-        alphabets: false,
-        upperCase: false,
+        lowerCaseAlphabets: false,
         specialChars: false,
+        upperCaseAlphabets: false,
       });
+
       const otpToken = getToken(otp);
       await mail(email, otp);
       return res

@@ -2,6 +2,7 @@ const { Router } = require("express");
 const Table = require("../../models/table.model");
 const Attendee = require("../../models/attendee.model");
 const User = require("../../models/user.model");
+const DayTable = require("../../models/DayTable");
 const { getData } = require("../../services/auth");
 
 const deleteTable = Router();
@@ -14,10 +15,16 @@ deleteTable.post("/", (req, res) => {
       Promise.all(
         table.attendees.map(async (attendee) => {
           await Attendee.deleteOne({ _id: attendee._id });
+        }),
+
+        table.tables.map(async (table) => {
+          await DayTable.deleteOne({ _id: table._id });
         })
       );
+
       await Table.deleteOne({ _id: tableid });
-      const result = await User.updateOne(
+
+      await User.updateOne(
         { _id: getData(token).id },
         { $pull: { tables: tableid } }
       );

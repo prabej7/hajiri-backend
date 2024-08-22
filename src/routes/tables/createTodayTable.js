@@ -15,11 +15,9 @@ createTodayTable.post("/", async (req, res) => {
     });
 
     if (!existingDayTable) {
-      const attendeesWithPresence = table.attendees.map((attendee) => ({
-        _id: attendee._id,
-        name: attendee.name,
-        presence: false,
-      }));
+      const attendeesWithPresence = table.attendees.filter((attendee) => {
+        return { ...attendee, presence: false };
+      });
 
       const newDayTable = new DayTable({
         date: date,

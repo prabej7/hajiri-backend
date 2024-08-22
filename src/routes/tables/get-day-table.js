@@ -6,7 +6,11 @@ getDayTable.post("/", (req, res) => {
   (async () => {
     try {
       const { tableid, date } = req.body;
-      const table = await DayTable.findOne({ table: tableid, date: date });
+      const table = await DayTable.findOne({
+        table: tableid,
+        date: date,
+      }).populate("attendees");
+
       if (table) return res.status(200).json(table);
       return res.status(404).json({ message: "Table not found!" });
     } catch (e) {
